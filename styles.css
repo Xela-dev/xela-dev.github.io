@@ -243,7 +243,7 @@ h3 {
   z-index: 1;
   pointer-events: none;
   overflow: hidden;
-  filter: saturate(1.08);
+  filter: saturate(1.14) brightness(1.08);
 }
 
 .page-bubble {

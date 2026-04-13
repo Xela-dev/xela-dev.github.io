@@ -51,13 +51,8 @@ h3 {
   min-height: 100vh;
   overflow-x: hidden;
   background:
-    radial-gradient(circle at 18% 14%, rgba(248, 197, 85, 0.18), transparent 20%),
-    radial-gradient(circle at 40% 20%, rgba(255, 107, 43, 0.16), transparent 18%),
-    radial-gradient(circle at 60% 30%, rgba(255, 79, 163, 0.14), transparent 18%),
-    radial-gradient(circle at 75% 50%, rgba(39, 211, 255, 0.14), transparent 20%),
-    radial-gradient(circle at 60% 80%, rgba(120, 255, 180, 0.12), transparent 22%),
-    radial-gradient(circle at 40% 85%, rgba(160, 120, 255, 0.12), transparent 22%),
-    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 38%, var(--bg-3) 100%);
+    radial-gradient(circle at 50% 0%, rgba(39, 211, 255, 0.08), transparent 28%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 40%, var(--bg-3) 100%);
 }
 
 .section-anchor {
@@ -144,7 +139,6 @@ h3 {
 
 .nav-index,
 .nav-slash,
-.btn,
 .project-text,
 .project-cta,
 .expertise-code-open,
@@ -201,96 +195,18 @@ h3 {
   justify-content: center;
   padding: 96px 24px 64px;
   overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(39, 211, 255, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
 }
 
-.hero-shape {
+.hero::before {
+  content: "";
   position: absolute;
-  pointer-events: none;
-}
-
-.hero-shape-1 {
   inset: 0;
+  pointer-events: none;
   background:
-    radial-gradient(circle at 18% 14%, rgba(248, 197, 85, 0.18), transparent 20%),
-    radial-gradient(circle at 40% 20%, rgba(255, 107, 43, 0.16), transparent 18%),
-    radial-gradient(circle at 60% 30%, rgba(255, 79, 163, 0.14), transparent 18%),
-    radial-gradient(circle at 75% 50%, rgba(39, 211, 255, 0.14), transparent 20%),
-    radial-gradient(circle at 60% 80%, rgba(120, 255, 180, 0.12), transparent 22%),
-    radial-gradient(circle at 40% 85%, rgba(160, 120, 255, 0.12), transparent 22%),
-    radial-gradient(circle at center, transparent 26%, rgba(0, 0, 0, 0.3) 64%, rgba(0, 0, 0, 0.92) 100%);
-}
-
-.hero-shape-2 {
-  left: -14%;
-  top: -16%;
-  width: 1080px;
-  height: 1080px;
-  border-radius: 50%;
-  background:
-    radial-gradient(
-      circle at 70% 52%,
-      rgba(236, 240, 246, 0.72),
-      rgba(39, 211, 255, 0.2) 14%,
-      rgba(255, 79, 163, 0.14) 28%,
-      rgba(39, 211, 255, 0.08) 44%,
-      rgba(17, 19, 24, 0) 72%,
-      transparent 78%
-    );
-  filter: blur(1px);
-}
-
-.hero-shape-3 {
-  right: -8%;
-  top: 8%;
-  width: 900px;
-  height: 900px;
-  border-radius: 50%;
-  background:
-    radial-gradient(
-      circle at 24% 46%,
-      rgba(39, 211, 255, 0.1),
-      rgba(20, 24, 31, 0.92) 56%,
-      rgba(0, 0, 0, 1) 78%
-    );
-}
-
-.hero-shape-4 {
-  left: 47%;
-  top: -12%;
-  width: 150px;
-  height: 1120px;
-  transform: rotate(-7deg);
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.98) 14%,
-      rgba(0, 0, 0, 1) 48%,
-      rgba(0, 0, 0, 0.98) 84%,
-      rgba(0, 0, 0, 0)
-    );
-  filter: blur(8px);
-}
-
-.hero-shape-5 {
-  left: 30%;
-  top: 14%;
-  width: 520px;
-  height: 520px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(39, 211, 255, 0.12), rgba(255, 79, 163, 0.05) 42%, transparent 74%);
-  filter: blur(48px);
-}
-
-.hero-shape-6 {
-  bottom: 6%;
-  left: 50%;
-  width: 82%;
-  height: 220px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(39, 211, 255, 0.08), transparent 62%);
-  filter: blur(48px);
+    radial-gradient(circle at center, transparent 0%, transparent 54%, rgba(0, 0, 0, 0.2) 78%, rgba(0, 0, 0, 0.38) 100%);
 }
 
 .hero-shell {
@@ -334,47 +250,6 @@ h3 {
 
 .hero-text p + p {
   margin-top: 18px;
-}
-
-.hero-actions {
-  margin-top: 32px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 20px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  transition: 0.25s ease;
-}
-
-.btn-primary {
-  border: 1px solid rgba(120, 255, 180, 0.35);
-  background: rgba(120, 255, 180, 0.08);
-  color: var(--text);
-}
-
-.btn-primary:hover {
-  border-color: rgba(120, 255, 180, 0.55);
-  background: rgba(120, 255, 180, 0.14);
-}
-
-.btn-secondary {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text);
-}
-
-.btn-secondary:hover {
-  border-color: rgba(120, 255, 180, 0.35);
-  background: rgba(120, 255, 180, 0.08);
 }
 
 .section {
@@ -728,11 +603,6 @@ h3 {
     padding: 24px;
   }
 
-  .hero-actions {
-    flex-direction: column;
-  }
-
-  .btn,
   .project-cta {
     width: 100%;
   }
@@ -758,7 +628,6 @@ h3 {
   .site-header,
   .brand,
   .nav-item,
-  .btn,
   .project-card,
   .project-card::before,
   .project-cta {

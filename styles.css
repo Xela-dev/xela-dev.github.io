@@ -1,11 +1,11 @@
 :root {
-  --bg: #111318;
-  --bg-2: #0d1015;
-  --bg-3: #0a0c10;
-  --panel: rgba(19, 22, 28, 0.88);
-  --panel-2: rgba(12, 14, 19, 0.94);
-  --card: rgba(18, 22, 29, 0.96);
-  --card-2: rgba(12, 15, 20, 0.96);
+  --bg: #020304;
+  --bg-2: #05070a;
+  --bg-3: #090c10;
+  --panel: rgba(10, 12, 16, 0.9);
+  --panel-2: rgba(4, 5, 8, 0.96);
+  --card: rgba(10, 12, 17, 0.97);
+  --card-2: rgba(4, 6, 9, 0.98);
   --text: #e6edf3;
   --muted: rgba(210, 217, 228, 0.76);
   --muted-2: rgba(194, 201, 212, 0.68);
@@ -48,11 +48,37 @@ h3 {
 }
 
 .page {
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
   overflow-x: hidden;
   background:
-    radial-gradient(circle at 50% 0%, rgba(39, 211, 255, 0.08), transparent 28%),
-    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 40%, var(--bg-3) 100%);
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 42%, var(--bg-3) 100%);
+}
+
+.page::before,
+.page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.page::before {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(39, 211, 255, 0.06), transparent 24%),
+    radial-gradient(circle at 12% 34%, rgba(255, 79, 163, 0.035), transparent 20%),
+    radial-gradient(circle at 88% 72%, rgba(120, 255, 180, 0.03), transparent 22%);
+}
+
+.page::after {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.08) 24%, rgba(0, 0, 0, 0.24) 100%);
+}
+
+.page > main {
+  position: relative;
+  z-index: 2;
 }
 
 .section-anchor {
@@ -189,6 +215,7 @@ h3 {
 
 .hero {
   position: relative;
+  isolation: isolate;
   min-height: 82vh;
   display: flex;
   align-items: center;
@@ -196,22 +223,363 @@ h3 {
   padding: 96px 24px 64px;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 18%, rgba(39, 211, 255, 0.12), transparent 30%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+    radial-gradient(circle at 50% 14%, rgba(39, 211, 255, 0.055), transparent 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.012), rgba(255, 255, 255, 0));
 }
 
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at center, transparent 0%, transparent 54%, rgba(0, 0, 0, 0.2) 78%, rgba(0, 0, 0, 0.38) 100%);
+    radial-gradient(circle at center, transparent 0%, transparent 48%, rgba(0, 0, 0, 0.3) 76%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.page-bubbles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  filter: saturate(1.08);
+}
+
+.page-bubble {
+  --size: 120px;
+  --left: 50%;
+  --top: 50%;
+  --duration: 18s;
+  --delay: 0s;
+  --drift-x: 16px;
+  --drift-y: -22px;
+  --opacity: 0.4;
+  --ring-angle: 160deg;
+  --tint-a: rgba(39, 211, 255, 0.2);
+  --tint-b: rgba(255, 79, 163, 0.18);
+  --tint-c: rgba(120, 255, 180, 0.14);
+  position: absolute;
+  left: var(--left);
+  top: var(--top);
+  width: var(--size);
+  height: var(--size);
+  overflow: hidden;
+  border: 0;
+  border-radius: 50%;
+  opacity: var(--opacity);
+  background:
+    radial-gradient(circle at 24% 26%, rgba(255, 255, 255, 0.9) 0 5%, rgba(255, 255, 255, 0.22) 8%, rgba(255, 255, 255, 0) 20%),
+    radial-gradient(circle at 32% 34%, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 22%),
+    radial-gradient(circle at 72% 72%, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0) 42%),
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0) 68%);
+  box-shadow:
+    inset -14px -16px 28px rgba(0, 0, 0, 0.22),
+    inset 10px 10px 20px rgba(255, 255, 255, 0.04),
+    0 0 12px rgba(255, 255, 255, 0.04);
+  mix-blend-mode: screen;
+  pointer-events: auto;
+  cursor: pointer;
+  transition:
+    left 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+    top 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.22s ease,
+    filter 0.22s ease,
+    box-shadow 0.22s ease;
+  will-change: transform, opacity, filter;
+  animation: bubble-float var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+.page-bubble.is-active {
+  opacity: calc(var(--opacity) + 0.14);
+  filter: brightness(1.14) saturate(1.16);
+  box-shadow:
+    inset -14px -16px 28px rgba(0, 0, 0, 0.18),
+    inset 10px 10px 20px rgba(255, 255, 255, 0.06),
+    0 0 18px rgba(255, 255, 255, 0.06),
+    0 0 44px rgba(39, 211, 255, 0.07);
+}
+
+.page-bubble::before,
+.page-bubble::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.page-bubble::before {
+  inset: 0;
+  padding: 2px;
+  background:
+    conic-gradient(
+      from var(--ring-angle),
+      rgba(54, 227, 255, 0.95),
+      rgba(122, 255, 186, 0.8) 0.18turn,
+      rgba(255, 211, 92, 0.94) 0.38turn,
+      rgba(255, 91, 177, 0.96) 0.62turn,
+      rgba(149, 128, 255, 0.9) 0.82turn,
+      rgba(54, 227, 255, 0.95) 1turn
+    );
+  opacity: 0.98;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.page-bubble::after {
+  width: 42%;
+  height: 16%;
+  top: 14%;
+  left: 10%;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.64), rgba(255, 255, 255, 0));
+  transform: rotate(-18deg);
+  filter: blur(4px);
+}
+
+.bubble-1 {
+  --size: 72px;
+  --left: 8%;
+  --top: 8%;
+  --duration: 15s;
+  --delay: -5s;
+  --drift-x: 18px;
+  --drift-y: -20px;
+  --opacity: 0.36;
+  --ring-angle: 210deg;
+  --tint-a: rgba(39, 211, 255, 0.24);
+  --tint-b: rgba(255, 79, 163, 0.18);
+  --tint-c: rgba(120, 255, 180, 0.14);
+}
+
+.bubble-2 {
+  --size: 188px;
+  --left: 18%;
+  --top: 24%;
+  --duration: 21s;
+  --delay: -8s;
+  --drift-x: -26px;
+  --drift-y: -28px;
+  --opacity: 0.28;
+  --ring-angle: 32deg;
+  --tint-a: rgba(39, 211, 255, 0.18);
+  --tint-b: rgba(255, 79, 163, 0.22);
+  --tint-c: rgba(120, 255, 180, 0.12);
+}
+
+.bubble-3 {
+  --size: 124px;
+  --left: 76%;
+  --top: 12%;
+  --duration: 17s;
+  --delay: -10s;
+  --drift-x: 20px;
+  --drift-y: -18px;
+  --opacity: 0.32;
+  --ring-angle: 112deg;
+  --tint-a: rgba(120, 255, 180, 0.16);
+  --tint-b: rgba(39, 211, 255, 0.18);
+  --tint-c: rgba(255, 79, 163, 0.14);
+}
+
+.bubble-4 {
+  --size: 264px;
+  --left: 64%;
+  --top: 32%;
+  --duration: 24s;
+  --delay: -12s;
+  --drift-x: -32px;
+  --drift-y: 18px;
+  --opacity: 0.22;
+  --ring-angle: 280deg;
+  --tint-a: rgba(39, 211, 255, 0.16);
+  --tint-b: rgba(255, 79, 163, 0.14);
+  --tint-c: rgba(120, 255, 180, 0.1);
+}
+
+.bubble-5 {
+  --size: 102px;
+  --left: 10%;
+  --top: 48%;
+  --duration: 18s;
+  --delay: -4s;
+  --drift-x: 24px;
+  --drift-y: -26px;
+  --opacity: 0.34;
+  --ring-angle: 192deg;
+  --tint-a: rgba(255, 79, 163, 0.18);
+  --tint-b: rgba(39, 211, 255, 0.2);
+  --tint-c: rgba(120, 255, 180, 0.16);
+}
+
+.bubble-6 {
+  --size: 152px;
+  --left: 80%;
+  --top: 56%;
+  --duration: 19s;
+  --delay: -7s;
+  --drift-x: -20px;
+  --drift-y: -24px;
+  --opacity: 0.26;
+  --ring-angle: 64deg;
+  --tint-a: rgba(39, 211, 255, 0.22);
+  --tint-b: rgba(120, 255, 180, 0.12);
+  --tint-c: rgba(255, 79, 163, 0.14);
+}
+
+.bubble-7 {
+  --size: 46px;
+  --left: 24%;
+  --top: 72%;
+  --duration: 14s;
+  --delay: -9s;
+  --drift-x: 12px;
+  --drift-y: -16px;
+  --opacity: 0.4;
+  --ring-angle: 150deg;
+  --tint-a: rgba(255, 79, 163, 0.18);
+  --tint-b: rgba(39, 211, 255, 0.16);
+  --tint-c: rgba(120, 255, 180, 0.12);
+}
+
+.bubble-8 {
+  --size: 226px;
+  --left: 92%;
+  --top: 78%;
+  --duration: 23s;
+  --delay: -15s;
+  --drift-x: -22px;
+  --drift-y: -22px;
+  --opacity: 0.2;
+  --ring-angle: 320deg;
+  --tint-a: rgba(39, 211, 255, 0.14);
+  --tint-b: rgba(255, 79, 163, 0.12);
+  --tint-c: rgba(120, 255, 180, 0.1);
+}
+
+.bubble-9 {
+  --size: 116px;
+  --left: 58%;
+  --top: 88%;
+  --duration: 18s;
+  --delay: -11s;
+  --drift-x: 18px;
+  --drift-y: -24px;
+  --opacity: 0.24;
+  --ring-angle: 96deg;
+  --tint-a: rgba(120, 255, 180, 0.14);
+  --tint-b: rgba(39, 211, 255, 0.18);
+  --tint-c: rgba(255, 79, 163, 0.12);
+}
+
+.bubble-10 {
+  --size: 134px;
+  --left: 14%;
+  --top: 96%;
+  --duration: 22s;
+  --delay: -6s;
+  --drift-x: -20px;
+  --drift-y: -18px;
+  --opacity: 0.18;
+  --ring-angle: 12deg;
+  --tint-a: rgba(39, 211, 255, 0.14);
+  --tint-b: rgba(255, 79, 163, 0.12);
+  --tint-c: rgba(120, 255, 180, 0.08);
+}
+
+.bubble-11 {
+  --size: 34px;
+  --left: 42%;
+  --top: 18%;
+  --duration: 13s;
+  --delay: -3s;
+  --drift-x: 10px;
+  --drift-y: -12px;
+  --opacity: 0.42;
+  --ring-angle: 238deg;
+  --tint-a: rgba(39, 211, 255, 0.2);
+  --tint-b: rgba(255, 79, 163, 0.14);
+  --tint-c: rgba(120, 255, 180, 0.1);
+}
+
+.bubble-12 {
+  --size: 72px;
+  --left: calc(100% - 96px);
+  --top: clamp(220px, 54vh, 420px);
+  --duration: 23s;
+  --delay: -11s;
+  --drift-x: -8px;
+  --drift-y: -12px;
+  --opacity: 0.22;
+  --ring-angle: 46deg;
+  --tint-a: rgba(255, 79, 163, 0.16);
+  --tint-b: rgba(39, 211, 255, 0.2);
+  --tint-c: rgba(120, 255, 180, 0.12);
+}
+
+.bubble-13 {
+  --size: 58px;
+  --left: 36%;
+  --top: 64%;
+  --duration: 15s;
+  --delay: -13s;
+  --drift-x: 12px;
+  --drift-y: -14px;
+  --opacity: 0.34;
+  --ring-angle: 176deg;
+  --tint-a: rgba(120, 255, 180, 0.16);
+  --tint-b: rgba(39, 211, 255, 0.16);
+  --tint-c: rgba(255, 79, 163, 0.14);
+}
+
+.bubble-14 {
+  --size: 142px;
+  --left: 86%;
+  --top: 86%;
+  --duration: 20s;
+  --delay: -5s;
+  --drift-x: -12px;
+  --drift-y: -16px;
+  --opacity: 0.22;
+  --ring-angle: 292deg;
+  --tint-a: rgba(39, 211, 255, 0.18);
+  --tint-b: rgba(120, 255, 180, 0.12);
+  --tint-c: rgba(255, 79, 163, 0.1);
+}
+
+.bubble-easter {
+  overflow: hidden;
+  background: url("s/one-bubble.png") center / 66% 66% no-repeat;
+  box-shadow:
+    0 0 10px rgba(196, 154, 255, 0.08),
+    0 0 14px rgba(39, 211, 255, 0.04);
+  clip-path: circle(47.5% at 50% 50%);
+  filter: saturate(0.82) contrast(0.94) brightness(0.84);
+  mix-blend-mode: normal;
+}
+
+.bubble-easter.is-active {
+  opacity: 0.94;
+  filter: saturate(1.08) brightness(1.02) contrast(1.04);
+  box-shadow:
+    0 0 18px rgba(196, 154, 255, 0.16),
+    0 0 28px rgba(39, 211, 255, 0.08);
+}
+
+.bubble-easter::before,
+.bubble-easter::after {
+  display: none;
 }
 
 .hero-shell {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   justify-content: center;
 }
@@ -575,6 +943,25 @@ h3 {
   color: rgba(255, 236, 231, 0.45);
 }
 
+@keyframes bubble-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.98);
+  }
+
+  25% {
+    transform: translate3d(var(--drift-x), calc(var(--drift-y) * 0.6), 0) scale(1.03);
+  }
+
+  55% {
+    transform: translate3d(calc(var(--drift-x) * -0.45), var(--drift-y), 0) scale(0.96);
+  }
+
+  80% {
+    transform: translate3d(calc(var(--drift-x) * 0.65), calc(var(--drift-y) * 0.2), 0) scale(1.05);
+  }
+}
+
 @media (max-width: 1024px) {
   .nav {
     display: none;
@@ -597,6 +984,23 @@ h3 {
   .hero {
     min-height: auto;
     padding: 88px 16px 56px;
+  }
+
+  .bubble-4,
+  .bubble-8,
+  .bubble-10,
+  .bubble-14 {
+    display: none;
+  }
+
+  .page-bubble {
+    opacity: calc(var(--opacity) * 0.9);
+  }
+
+  .bubble-12 {
+    --size: 64px;
+    --left: calc(100% - 78px);
+    --top: clamp(240px, 60vh, 430px);
   }
 
   .hero-inner {
@@ -630,7 +1034,12 @@ h3 {
   .nav-item,
   .project-card,
   .project-card::before,
-  .project-cta {
+  .project-cta,
+  .page-bubble {
     transition: none;
+  }
+
+  .page-bubble {
+    animation: none;
   }
 }

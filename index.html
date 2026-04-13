@@ -13,6 +13,23 @@
   </head>
   <body>
     <div class="page">
+      <div class="page-bubbles" aria-hidden="true">
+        <span class="page-bubble bubble-1"></span>
+        <span class="page-bubble bubble-2"></span>
+        <span class="page-bubble bubble-3"></span>
+        <span class="page-bubble bubble-4"></span>
+        <span class="page-bubble bubble-5"></span>
+        <span class="page-bubble bubble-6"></span>
+        <span class="page-bubble bubble-7"></span>
+        <span class="page-bubble bubble-8"></span>
+        <span class="page-bubble bubble-9"></span>
+        <span class="page-bubble bubble-10"></span>
+        <span class="page-bubble bubble-11"></span>
+        <span class="page-bubble bubble-12 bubble-easter"></span>
+        <span class="page-bubble bubble-13"></span>
+        <span class="page-bubble bubble-14"></span>
+      </div>
+
       <header class="site-header" id="site-header">
         <div class="site-header-bar">
           <div class="site-header-inner">
@@ -262,7 +279,23 @@
     </div>
 
     <script>
+      const page = document.querySelector('.page');
       const header = document.getElementById('site-header');
+      const bubbles = Array.from(document.querySelectorAll('.page-bubble'));
+      const easterBubble = document.querySelector('.bubble-easter');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const finePointer = window.matchMedia('(pointer: fine)');
+      const bubbleSoundPaths = [
+        'sounds/bubble-pop-1.wav',
+        'sounds/bubble-pop-2.wav',
+        'sounds/bubble-bloop-1.wav',
+        'sounds/bubble-bloop-2.wav',
+      ].map((path) => new URL(path, window.location.href).href);
+      const bubbleSounds = bubbleSoundPaths.map((path) => {
+        const audio = new Audio(path);
+        audio.preload = 'auto';
+        return audio;
+      });
 
       function updateHeaderVisibility() {
         if (!header) {
@@ -273,9 +306,117 @@
         header.classList.toggle('is-visible', shouldShow);
       }
 
+      function moveBubbleAcrossPage(bubble, event) {
+        if (!page || prefersReducedMotion.matches || !finePointer.matches) {
+          return;
+        }
+
+        if (bubble.dataset.fleeing === '1') {
+          return;
+        }
+
+        const pageRect = page.getBoundingClientRect();
+        const bubbleRect = bubble.getBoundingClientRect();
+        const pageWidth = page.clientWidth;
+        const pageHeight = page.offsetHeight;
+
+        if (!pageWidth || !pageHeight) {
+          return;
+        }
+
+        const bubbleSize = bubbleRect.width;
+        const margin = Math.max(16, bubbleSize * 0.18);
+        const minX = margin;
+        const maxX = Math.max(minX, pageWidth - bubbleSize - margin);
+        const minY = margin;
+        const maxY = Math.max(minY, pageHeight - bubbleSize - margin);
+        const pointerX = event.clientX - pageRect.left;
+        const pointerY = event.clientY - pageRect.top;
+        const minDistance = Math.min(Math.max(260, bubbleSize * 1.8), Math.min(pageWidth, pageHeight) * 0.58);
+
+        let targetX = minX;
+        let targetY = minY;
+        let attempt = 0;
+
+        do {
+          targetX = minX + Math.random() * Math.max(1, maxX - minX);
+          targetY = minY + Math.random() * Math.max(1, maxY - minY);
+          attempt += 1;
+        } while (
+          attempt < 18 &&
+          Math.hypot((targetX + bubbleSize / 2) - pointerX, (targetY + bubbleSize / 2) - pointerY) < minDistance
+        );
+
+        bubble.dataset.fleeing = '1';
+        bubble.style.setProperty('--left', `${targetX.toFixed(1)}px`);
+        bubble.style.setProperty('--top', `${targetY.toFixed(1)}px`);
+        bubble.style.setProperty('--drift-x', `${(Math.random() * 56 - 28).toFixed(0)}px`);
+        bubble.style.setProperty('--drift-y', `${(-14 - Math.random() * 28).toFixed(0)}px`);
+        bubble.style.setProperty('--ring-angle', `${Math.floor(Math.random() * 360)}deg`);
+        bubble.classList.add('is-active');
+
+        window.clearTimeout(bubble._fleeTimer);
+        bubble._fleeTimer = window.setTimeout(() => {
+          bubble.dataset.fleeing = '';
+          bubble.classList.remove('is-active');
+        }, 1100);
+      }
+
+      function playRandomBubbleSound() {
+        if (!bubbleSounds.length) {
+          return;
+        }
+
+        const source = bubbleSounds[Math.floor(Math.random() * bubbleSounds.length)];
+        const sound = new Audio(source.src);
+        sound.volume = 0.42;
+        void sound.play().catch(() => {});
+      }
+
       updateHeaderVisibility();
       window.addEventListener('scroll', updateHeaderVisibility, { passive: true });
       window.addEventListener('resize', updateHeaderVisibility);
+
+      bubbles.forEach((bubble) => {
+        if (bubble === easterBubble) {
+          return;
+        }
+
+        bubble.addEventListener(
+          'pointerenter',
+          (event) => {
+            moveBubbleAcrossPage(bubble, event);
+          },
+          { passive: true }
+        );
+      });
+
+      if (easterBubble) {
+        easterBubble.addEventListener(
+          'pointerenter',
+          () => {
+            easterBubble.classList.add('is-active');
+          },
+          { passive: true }
+        );
+
+        easterBubble.addEventListener(
+          'pointerleave',
+          () => {
+            if (easterBubble.dataset.fleeing === '1') {
+              return;
+            }
+
+            easterBubble.classList.remove('is-active');
+          },
+          { passive: true }
+        );
+
+        easterBubble.addEventListener('click', (event) => {
+          playRandomBubbleSound();
+          moveBubbleAcrossPage(easterBubble, event);
+        });
+      }
     </script>
   </body>
 </html>

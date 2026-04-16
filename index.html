@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="public/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="public/one-bubble.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -13,11 +13,27 @@
   </head>
   <body>
     <div class="page">
+      <div class="page-bubbles" aria-hidden="true">
+        <span class="page-bubble bubble-1"></span>
+        <span class="page-bubble bubble-2"></span>
+        <span class="page-bubble bubble-3"></span>
+        <span class="page-bubble bubble-4"></span>
+        <span class="page-bubble bubble-5"></span>
+        <span class="page-bubble bubble-6"></span>
+        <span class="page-bubble bubble-7"></span>
+        <span class="page-bubble bubble-8"></span>
+        <span class="page-bubble bubble-9"></span>
+        <span class="page-bubble bubble-10"></span>
+        <span class="page-bubble bubble-11"></span>
+        <span class="page-bubble bubble-12 bubble-easter"></span>
+        <span class="page-bubble bubble-13"></span>
+        <span class="page-bubble bubble-14"></span>
+      </div>
       <header class="site-header" id="site-header">
         <div class="site-header-bar">
           <div class="site-header-inner">
             <a href="#hero-section" class="brand">
-              Aleksandra<span class="brand-dot">.</span><span class="brand-accent">_</span><span class="brand-dot">.</span>Nosińska
+              <span class="brand-first">Aleksandra</span><span class="brand-dot">.</span><span class="brand-accent">_</span><span class="brand-dot">.</span><span class="brand-last">Nosińska</span>
             </a>
 
             <nav class="nav" aria-label="Primary navigation">
@@ -44,23 +60,6 @@
 
       <main>
         <section id="hero-section" class="hero section-anchor">
-          <div class="page-bubbles" aria-hidden="true">
-            <span class="page-bubble bubble-1"></span>
-            <span class="page-bubble bubble-2"></span>
-            <span class="page-bubble bubble-3"></span>
-            <span class="page-bubble bubble-4"></span>
-            <span class="page-bubble bubble-5"></span>
-            <span class="page-bubble bubble-6"></span>
-            <span class="page-bubble bubble-7"></span>
-            <span class="page-bubble bubble-8"></span>
-            <span class="page-bubble bubble-9"></span>
-            <span class="page-bubble bubble-10"></span>
-            <span class="page-bubble bubble-11"></span>
-            <span class="page-bubble bubble-12 bubble-easter"></span>
-            <span class="page-bubble bubble-13"></span>
-            <span class="page-bubble bubble-14"></span>
-          </div>
-
           <div class="container hero-shell">
             <div class="hero-inner">
               <div class="hero-kicker">
@@ -196,6 +195,23 @@
           <div class="expertise-grid">
             <article class="expertise-card">
               <div class="expertise-head">
+                <div class="expertise-icon">GP</div>
+                <h3 class="expertise-title">Game<br />Development</h3>
+              </div>
+
+              <div class="expertise-code">
+                <div class="expertise-code-open">&lt;h3&gt;</div>
+                <p class="expertise-text">
+                  Experience in Unreal Engine (C++) and Unity (C#), including gameplay
+                  feature implementation, platform adaptation, UI/input redesign,
+                  performance optimization, and release-readiness support for ports.
+                </p>
+                <div class="expertise-code-close">&lt;/h3&gt;</div>
+              </div>
+            </article>
+
+            <article class="expertise-card">
+              <div class="expertise-head">
                 <div class="expertise-icon">UI</div>
                 <h3 class="expertise-title">Software<br />Development</h3>
               </div>
@@ -227,33 +243,16 @@
                 <div class="expertise-code-close">&lt;/h3&gt;</div>
               </div>
             </article>
-
-            <article class="expertise-card">
-              <div class="expertise-head">
-                <div class="expertise-icon">GP</div>
-                <h3 class="expertise-title">Game Dev<br />&amp; Porting</h3>
-              </div>
-
-              <div class="expertise-code">
-                <div class="expertise-code-open">&lt;h3&gt;</div>
-                <p class="expertise-text">
-                  Experience in Unity C# development, platform adaptation, UI changes,
-                  input redesign, performance fixes, and release-readiness support.
-                </p>
-                <div class="expertise-code-close">&lt;/h3&gt;</div>
-              </div>
-            </article>
           </div>
         </section>
 
         <section id="contact" class="contact section-anchor">
           <div class="contact-inner">
             <div class="contact-copy">
-              <h2 class="contact-title">Available for select freelance opportunities</h2>
+              <h2 class="contact-title">Get in Touch</h2>
 
               <p class="contact-text">
-                Have an exciting project you need help with? Send me an email or contact
-                me via instant message.
+                Open to collaboration on gameplay, backend, and real-time systems.
               </p>
 
               <div class="contact-links">
@@ -262,11 +261,17 @@
                 </a>
 
                 <div class="contact-link-list">
-                  <a href="https://linkedin.com/in/aleksandra-nosinska" target="_blank" rel="noreferrer">
-                    LinkedIn
+                  <a class="contact-social-link" href="https://linkedin.com/in/aleksandra-nosinska" target="_blank" rel="noreferrer">
+                    <svg class="contact-social-icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor" d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0M7.119 20.451H3.555V9h3.564zM5.337 7.433a2.063 2.063 0 1 1 0-4.126 2.063 2.063 0 0 1 0 4.126m15.114 13.018h-3.554V14.84c0-1.337-.027-3.058-1.864-3.058-1.865 0-2.151 1.454-2.151 2.958v5.711H9.328V9h3.414v1.561h.049c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455z"/>
+                    </svg>
+                    <span>LinkedIn</span>
                   </a>
-                  <a href="https://github.com/Xela-dev" target="_blank" rel="noreferrer">
-                    GitHub
+                  <a class="contact-social-link" href="https://github.com/Xela-dev" target="_blank" rel="noreferrer">
+                    <svg class="contact-social-icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.21.68-.48v-1.69c-2.78.6-3.37-1.19-3.37-1.19-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.87 1.51 2.34 1.08 2.91.83.09-.65.34-1.08.62-1.33-2.22-.25-4.55-1.11-4.55-4.93 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.29.1-2.67 0 0 .84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.42.1 2.67.64.7 1.03 1.6 1.03 2.69 0 3.83-2.33 4.68-4.56 4.92.36.31.67.92.67 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2"/>
+                    </svg>
+                    <span>GitHub</span>
                   </a>
                 </div>
               </div>
@@ -280,11 +285,7 @@
 
     <script>
       const header = document.getElementById('site-header');
-      const bubbleField = document.querySelector('.page-bubbles');
-      const bubbles = Array.from(document.querySelectorAll('.page-bubble'));
       const easterBubble = document.querySelector('.bubble-easter');
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      const finePointer = window.matchMedia('(pointer: fine)');
       const bubbleSoundPaths = [
         'sounds/bubble-pop-1.wav',
         'sounds/bubble-pop-2.wav',
@@ -306,64 +307,6 @@
         header.classList.toggle('is-visible', shouldShow);
       }
 
-      function moveBubbleAcrossPage(bubble, event) {
-        const bubbleArea = bubbleField ?? document.querySelector('.page');
-
-        if (!bubbleArea || prefersReducedMotion.matches || !finePointer.matches) {
-          return;
-        }
-
-        if (bubble.dataset.fleeing === '1') {
-          return;
-        }
-
-        const pageRect = bubbleArea.getBoundingClientRect();
-        const bubbleRect = bubble.getBoundingClientRect();
-        const pageWidth = bubbleArea.clientWidth;
-        const pageHeight = bubbleArea.clientHeight;
-
-        if (!pageWidth || !pageHeight) {
-          return;
-        }
-
-        const bubbleSize = bubbleRect.width;
-        const margin = Math.max(16, bubbleSize * 0.18);
-        const minX = margin;
-        const maxX = Math.max(minX, pageWidth - bubbleSize - margin);
-        const minY = margin;
-        const maxY = Math.max(minY, pageHeight - bubbleSize - margin);
-        const pointerX = event.clientX - pageRect.left;
-        const pointerY = event.clientY - pageRect.top;
-        const minDistance = Math.min(Math.max(260, bubbleSize * 1.8), Math.min(pageWidth, pageHeight) * 0.58);
-
-        let targetX = minX;
-        let targetY = minY;
-        let attempt = 0;
-
-        do {
-          targetX = minX + Math.random() * Math.max(1, maxX - minX);
-          targetY = minY + Math.random() * Math.max(1, maxY - minY);
-          attempt += 1;
-        } while (
-          attempt < 18 &&
-          Math.hypot((targetX + bubbleSize / 2) - pointerX, (targetY + bubbleSize / 2) - pointerY) < minDistance
-        );
-
-        bubble.dataset.fleeing = '1';
-        bubble.style.setProperty('--left', `${targetX.toFixed(1)}px`);
-        bubble.style.setProperty('--top', `${targetY.toFixed(1)}px`);
-        bubble.style.setProperty('--drift-x', `${(Math.random() * 56 - 28).toFixed(0)}px`);
-        bubble.style.setProperty('--drift-y', `${(-14 - Math.random() * 28).toFixed(0)}px`);
-        bubble.style.setProperty('--ring-angle', `${Math.floor(Math.random() * 360)}deg`);
-        bubble.classList.add('is-active');
-
-        window.clearTimeout(bubble._fleeTimer);
-        bubble._fleeTimer = window.setTimeout(() => {
-          bubble.dataset.fleeing = '';
-          bubble.classList.remove('is-active');
-        }, 1100);
-      }
-
       function playRandomBubbleSound() {
         if (!bubbleSounds.length) {
           return;
@@ -379,20 +322,6 @@
       window.addEventListener('scroll', updateHeaderVisibility, { passive: true });
       window.addEventListener('resize', updateHeaderVisibility);
 
-      bubbles.forEach((bubble) => {
-        if (bubble === easterBubble) {
-          return;
-        }
-
-        bubble.addEventListener(
-          'pointerenter',
-          (event) => {
-            moveBubbleAcrossPage(bubble, event);
-          },
-          { passive: true }
-        );
-      });
-
       if (easterBubble) {
         easterBubble.addEventListener(
           'pointerenter',
@@ -405,18 +334,13 @@
         easterBubble.addEventListener(
           'pointerleave',
           () => {
-            if (easterBubble.dataset.fleeing === '1') {
-              return;
-            }
-
             easterBubble.classList.remove('is-active');
           },
           { passive: true }
         );
 
-        easterBubble.addEventListener('click', (event) => {
+        easterBubble.addEventListener('click', () => {
           playRandomBubbleSound();
-          moveBubbleAcrossPage(easterBubble, event);
         });
       }
     </script>

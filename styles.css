@@ -128,12 +128,15 @@ h3 {
   font-size: 24px;
   font-weight: 600;
   letter-spacing: -0.04em;
-  color: var(--cyan);
   transition: color 0.25s ease;
 }
 
-.brand:hover {
-  color: var(--pink);
+.brand-first {
+  color: var(--cyan);
+}
+
+.brand-last {
+  color: var(--green);
 }
 
 .brand-dot {
@@ -142,6 +145,14 @@ h3 {
 
 .brand-accent {
   color: var(--pink);
+}
+
+.brand:hover .brand-first {
+  color: var(--pink);
+}
+
+.brand:hover .brand-last {
+  color: var(--yellow);
 }
 
 .nav {
@@ -222,9 +233,7 @@ h3 {
   justify-content: center;
   padding: 96px 24px 64px;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 14%, rgba(39, 211, 255, 0.055), transparent 26%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.012), rgba(255, 255, 255, 0));
+  background: transparent;
 }
 
 .hero::before {
@@ -233,8 +242,7 @@ h3 {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background:
-    radial-gradient(circle at center, transparent 0%, transparent 48%, rgba(0, 0, 0, 0.3) 76%, rgba(0, 0, 0, 0.5) 100%);
+  background: none;
 }
 
 .page-bubbles {
@@ -278,8 +286,8 @@ h3 {
     inset 10px 10px 20px rgba(255, 255, 255, 0.04),
     0 0 12px rgba(255, 255, 255, 0.04);
   mix-blend-mode: screen;
-  pointer-events: auto;
-  cursor: pointer;
+  pointer-events: none;
+  cursor: default;
   transition:
     left 1.05s cubic-bezier(0.22, 1, 0.36, 1),
     top 1.05s cubic-bezier(0.22, 1, 0.36, 1),
@@ -555,13 +563,15 @@ h3 {
 
 .bubble-easter {
   overflow: hidden;
-  background: url("s/one-bubble.png") center / 66% 66% no-repeat;
+  background: url("public/one-bubble.png") center / 66% 66% no-repeat;
   box-shadow:
     0 0 10px rgba(196, 154, 255, 0.08),
     0 0 14px rgba(39, 211, 255, 0.04);
   clip-path: circle(47.5% at 50% 50%);
-  filter: saturate(0.82) contrast(0.94) brightness(0.84);
+  filter: saturate(0.82) contrast(0.94) brightness(0.70);
   mix-blend-mode: normal;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .bubble-easter.is-active {
@@ -878,7 +888,9 @@ h3 {
 }
 
 .contact {
-  background: #0c0f14;
+  position: relative;
+  background: linear-gradient(180deg, rgba(5, 7, 10, 0.08), rgba(5, 7, 10, 0.26));
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   color: var(--text);
 }
 
@@ -929,8 +941,23 @@ h3 {
   font-weight: 700;
 }
 
+.contact-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.contact-social-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
 .contact-link-list a:hover {
   color: var(--green);
+  transform: translateX(2px);
 }
 
 .footer-note {
@@ -981,6 +1008,47 @@ h3 {
     width: min(100% - 32px, 1300px);
   }
 
+  .site-header-inner {
+    width: min(100% - 24px, 1300px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0 16px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(18px, 4.8vw, 22px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px 14px;
+    width: 100%;
+  }
+
+  .nav-item {
+    min-width: 72px;
+  }
+
+  .nav-label {
+    margin-top: 2px;
+    font-size: 12px;
+  }
+
+  .nav-slash {
+    margin-right: 5px;
+  }
+
   .hero {
     min-height: auto;
     padding: 88px 16px 56px;
@@ -1021,6 +1089,34 @@ h3 {
 
   .contact-links {
     margin-top: 72px;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-header-inner {
+    width: min(100% - 20px, 1300px);
+    padding: 12px 0 14px;
+  }
+
+  .brand {
+    font-size: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .nav {
+    gap: 8px 10px;
+  }
+
+  .nav-item {
+    min-width: 64px;
+  }
+
+  .nav-index {
+    font-size: 9px;
+  }
+
+  .nav-label {
+    font-size: 11px;
   }
 }
 
